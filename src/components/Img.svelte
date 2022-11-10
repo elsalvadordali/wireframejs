@@ -1,27 +1,35 @@
 <script lang="ts">
+    import P from './P.svelte'
     type Options = {
         dimensions? : 'square' | '4x3' | '3x4'
         size? : 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'fit' | 'cover'
         rounded? : boolean
         circle? : boolean
+        caption? : boolean
     }
     export let options: Options = {}
 
-    export let edgar: String | undefined = undefined
-    console.log(edgar)
+    //export let edgar: String | undefined = undefined
 
     let classes = 'img '
-    console.log(options)
     for (const option in options) {
         if (option === 'dimensions') {
             if (options.size) classes += ' ' + options.size + '-' + options.dimensions
         }
         if (option === 'circle') classes += ' circle'
+        if (option === 'caption') classes += ' caption'
     }
 </script>
 
-<div class={classes}></div>
+<div>
+    <div class={classes}>
 
+    </div>
+    {#if options.caption}
+    caption???
+        <P length='short' />
+    {/if}
+</div>
 
 <style>
     .circle {
@@ -116,7 +124,13 @@
         width: 18rem;
         height: 13.5rem;
     }
-
+    .caption {
+        height: 6px;
+        border: 3px solid #cecece;
+        background-color: #cecece;
+        border-radius: 6px;
+        margin: .5rem .25rem;
+    }
     
     
 </style>

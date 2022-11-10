@@ -5,12 +5,10 @@
     if (length == 'short') n = Math.ceil(Math.random() * 10) + 5 
     if (length == 'medium') n = Math.ceil(Math.random() * 15) + 30
     if (length == 'long') n = Math.ceil(Math.random() * 20) + 50
-    console.log(n)
     while (n > 0) {
         words.push('a' + Math.ceil(Math.random() * 6))
         n--
     }
-    console.log(n, words)
     
 </script>
 
@@ -41,4 +39,5 @@
         flex-flow: row wrap;
         padding: .5rem;
     }
+    
 </style>
