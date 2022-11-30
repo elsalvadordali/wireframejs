@@ -13,11 +13,12 @@
 </script>
 
 
-
+<div class='p parent'>
 <div class="flex">
     {#each words as n}
     <div class={n + ' gray'} ></div>
    {/each}
+</div>
 </div>
 
 <style>

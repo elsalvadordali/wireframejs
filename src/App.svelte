@@ -1,18 +1,27 @@
 <script lang="ts">
-  import Header from './components/Header.svelte'
-  import Img from './components/Img.svelte'
-  import P from './components/P.svelte';
-  import Card from './components/Card.svelte'
-  import Modulus from './components/Modulus.svelte'
-  import Input from './components/Input.svelte'
+    import Home from './Pages/Home.svelte'
+    import Menu from './Pages/Menu.svelte'
+    import { page } from './store'
 </script>
 
-<main>
-  <Header title="Igor's App" logo={{dimensions: 'square', size: 'xxs'}} />
-  <Input inputName='Name' />
-  <Card options={{ border: true, title: 'Restaurant A', centered: true, direction: 'row', image: true, text: 'medium'}} />
-  <Modulus />
-</main>
+<div class="phone">
+    {#if $page == 'pete'}
+        <Menu page='pete' />
+    {:else if $page == 'kate'}
+        <Menu page='kate' />
+    {:else if $page == 'tim'}
+        <Menu page='tim' />
+    {:else}
+        <Home />
+    {/if}
+</div>
 
 <style>
+    .phone {
+        width: 375px;
+        height: 667px;
+        border: 1rem solid black;
+        border-radius: 2rem;
+        overflow-y: scroll;
+    }
 </style>

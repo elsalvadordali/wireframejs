@@ -1,8 +1,19 @@
 <script lang="ts">
     import Img from "./Img.svelte"
     import P from './P.svelte'
+    import { setPage } from '../store'
     export let options
+    export let page
+    export let price
+    export let description
 
+    type Options = {
+        flex?: 'col' | 'row'
+        border?: boolean
+        centered?: boolean,
+        description?: string,
+        price?: number
+    }
     let css = 'card'
     for (const o in options) {
         if (o === 'flex') {
@@ -11,14 +22,19 @@
         }
         if (o === 'border' && options[o]) css += ' border'
         if (o === 'centered' && options[o]) css += ' center'
-        if (o === 'direction' && options[o] === 'row') css += ' row'
     }
     console.log(options.image) 
+    function clicked() {
+        console.log('go to ')
+        setPage(page)
+
+    }
 </script>
 
 
-<div class={css}>
+<div class={css} on:click={() => clicked()} on:keypress={() => clicked()}>
     <Img />
+    <slot></slot>
     {#if options.title}
         <h4 class='titl'>{options.title}</h4>
     {:else}
@@ -27,9 +43,13 @@
     {#if options.image == true} 
         <Img options={{size: options.direction == 'row' ? 'm' : 'xl', dimensions: 'square'}}/> 
     {/if}
+    {#if description}
+        <p>{description}</p>
+    {/if}
     {#if options.text}
         <P length={options.direction === 'row' ? 'short' : options.text} />
     {/if}
+
 </div>
 
 <style>
@@ -38,7 +58,11 @@
         padding: 1rem;
         display: flex;
         flex-flow: column nowrap;
-
+        align-items: center;
+        border: 2px solid black;
+    }
+    h4 {
+        text-align: center;
     }
     .row {
         flex-flow: row wrap;
