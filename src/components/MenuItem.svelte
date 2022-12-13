@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Img from './Img.svelte'
 	import P from './P.svelte'
+	import SelectNum from './SelectNum.svelte'
 	import { setPage } from '../store'
 	export let options
-	export let page
 
 	type Options = {
 		flex?: 'col' | 'row'
@@ -26,27 +26,21 @@
 	}
 </script>
 
-<div class="{css}" on:click="{() => clicked()}" on:keypress="{() => clicked()}">
+<div class="{css}">
 	<Img />
 	<slot />
 	{#if options.title}
 		<h4 class="titl">{options.title}</h4>
-	{:else}
-		<div class="title"></div>
-	{/if}
-	{#if options.image == true}
+		<P length="short" />
 		<Img
 			options="{{
 				size: options.direction == 'row' ? 'm' : 'xl',
 				dimensions: 'square'
 			}}"
 		/>
-	{/if}
-	{#if options.description}
-		<p>{description}</p>
-	{/if}
-	{#if options.text}
-		<P length="{options.direction === 'row' ? 'short' : options.text}" />
+		<SelectNum selection="{options.title}" />
+	{:else}
+		<div class="title"></div>
 	{/if}
 </div>
 

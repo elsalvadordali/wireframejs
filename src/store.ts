@@ -3,8 +3,16 @@ import { writable, readable } from "svelte/store";
 export const page = writable('home');
 
 export function setPage(newPage) {
-    console.log('were in')
     page.set(newPage);
+}
+
+export const order = writable({})
+
+export function updateOrder(newItem) {
+    order.update(oldOne => {
+        const updated = { ...oldOne, ...newItem}
+        return updated 
+    })
 }
 
 export const menu = readable([
@@ -33,9 +41,43 @@ export const menu = readable([
     {
         name: "Crusty Kate's",
         link: "kate",
+        menu: [
+            {
+                name: "Margharita Pizza",
+                price: 22.99,
+                description: "a 12-inch beauty with crust-to-crust cheese coverage. Basil optional",
+                allergens: ['milk', 'soy', 'cheese']
+            },
+            {
+                name: "Mushroom Pizza",
+                price: 23.99,
+                description: "The best mushrooms for the best pizza",
+                allergens: ['milk', 'soy', 'cheese', 'mushrooms']
+            },
+            {
+                name: "Meat-lover's Pizza",
+                price: 22.99,
+                description: "a 12-inch ",
+                allergens: ['milk', 'soy', 'cheese']
+            }
+        ]
     },
     {
         name: "Tiny Tim's",
         link: "tim",
+        menu: [
+            {
+                name: "3 Piece Pretzel Combo",
+                price: 8.99,
+                description: "Three 1-inch plain pretzels, with sea salt and no preservatives",
+                allergens: ['wheat', 'gluten']
+            },
+            {
+                name: "Giant Cheesy Pretzel",
+                price: 12.99,
+                description: "A giant 12-inch pretzel with 5-types of melted cheese",
+                allergens: ['wheat', 'gluten','cheese']
+            },
+        ]
     },
 ])
